@@ -1,0 +1,226 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\instructors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\instructors\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\models\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\models\\instructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\models\\coursestudents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\models\\coursestudents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\student\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\student\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\departments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\departments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\coursestudents\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\coursestudents\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\courses\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\courses\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 15,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:5:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Instructor.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Instructor.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\Instructor.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Instructor.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Models\\Instructor.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:44:59.444Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Department.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\Department.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Department.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Models\\Department.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:44:56.352Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CourseStudents.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\CourseStudents.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\CourseStudents.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\CourseStudents.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Models\\CourseStudents.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:44:52.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Course.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Course.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\Course.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Course.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Models\\Course.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:44:47.468Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Controllers\\StudentController.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Controllers\\StudentController.cs",
+              "ViewState": "AgIAAC4AAAAAMzMzMzMpwDsAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-30T06:43:34.897Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\Index.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Student\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\Index.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Student\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-30T06:42:39.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Instructors\\Index.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Instructors\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Instructors\\Index.cshtml*",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Instructors\\Index.cshtml*",
+              "ViewState": "AgIAABgAAACAZmZmZmYkwB0AAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-30T06:38:18.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\CourseStudents\\Index.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\CourseStudents\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\CourseStudents\\Index.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\CourseStudents\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-30T06:37:18.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Courses\\Index.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Courses\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Courses\\Index.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Courses\\Index.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAABAPTMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-30T06:35:42.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Departments\\Index.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Departments\\Index.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Departments\\Index.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Departments\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-09-29T20:09:44.748Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

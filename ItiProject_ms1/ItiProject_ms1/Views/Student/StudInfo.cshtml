@@ -1,0 +1,22 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model ItiProject_ms1.Models.Student
+@{
+    <div class="card" style="width: 18rem;">
+        <img src="@Model.ImagePath" alt="No Image" />
+
+        <div class="card-body">
+            <h5 class="card-title">@Model.Name</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">@Model.Id</li>
+            <li class="list-group-item">@Model.Name</li>
+            <li class="list-group-item">@Model.Grade</li>
+            <li class="list-group-item">@Model.Address</li>
+            <li class="list-group-item">@Model.DeptId</li>
+
+        </ul>
+
+    </div>
+}

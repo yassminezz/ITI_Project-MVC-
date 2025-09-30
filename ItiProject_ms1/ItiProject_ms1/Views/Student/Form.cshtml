@@ -1,0 +1,60 @@
+﻿@model ItiProject_ms1.Views.ViewModel.StudDeptViewModel
+
+@if (Model?.student.Id == 0)
+{
+    <h2>Add Student</h2>
+}
+else
+{
+    <h2>Update Student</h2>
+}
+
+<form asp-action="@(Model?.student.Id == 0 ? "AddStud" : "UpdateStud")" method="post">
+    <div class="form-group">
+        <label asp-for="@Model.student.Id"></label>
+        <input asp-for="@Model.student.Id" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.student.Name"></label>
+        <input asp-for="@Model.student.Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.student.Address"></label>
+        <input asp-for="@Model.student.Address" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.student.Grade"></label>
+        <input asp-for="@Model.student.Grade" class="form-control" />
+    </div>
+
+    @*   <div class="form-group">
+        <label asp-for="DeptId"></label>
+        <input asp-for="DeptId" class="form-control" />
+    </div> *@
+    <div class="ayhaga mt-3">
+        <label>Departments </label>
+        <select asp-for="student.DeptId" class="form-control">
+            @foreach (var dept in Model.departments)
+            {
+                if (dept.Id == Model.student.DeptId)
+                {
+                    <option value="@dept.Id" selected="selected">@dept.Name</option>
+                }
+                else
+                {
+                    <option value="@dept.Id">@dept.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary mt-3">
+        @(Model?.student.Id == 0 ? "Add" : "Update")
+    </button>
+</form>

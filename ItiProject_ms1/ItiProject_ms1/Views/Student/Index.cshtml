@@ -1,0 +1,36 @@
+﻿@model ItiProject_ms1.Views.ViewModel.StudentDeptViewModel
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Grade</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <a asp-action="AddStud" class="btn btn-success">Add Student</a>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model.students)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <td><img src="@s.ImagePath" width="60" height="60" /></td>
+                <td>@s.Name</td>
+                <td>@s.Address</td>
+                <td>@s.Grade</td>
+                <td>@Model.departments.FirstOrDefault(d => d.Id == s.DeptId)?.Name</td>
+                <td>
+                    <a href="/Student/UpdateStud/@s.Id" class="btn btn-warning">Update</a>
+                    <a href="/Student/deleteStud/@s.Id" class="btn btn-danger">Delete</a>
+                    <a href="/Student/ShowInfo/@s.Id" class="btn btn-success">Show Info</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
