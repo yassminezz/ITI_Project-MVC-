@@ -1,48 +1,147 @@
-﻿@model ItiProject_ms1.Models.Instructor
+﻿@model ItiProject_ms1.Views.ViewModel.InstructorDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Instructor Profile";
+    // NOTE: Ensure you have linked the Font Awesome CDN in your _Layout.cshtml file
 }
 
-<h1>Details</h1>
+<div class="container my-5">
+    @* Display Status Messages *@
+    @if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+    {
+        <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+    }
+    @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
 
-<div>
-    <h4>Instructor</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Salary)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Salary)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeptId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeptId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <img src="@Model.Instructor.ImagePath"
+                                class="card-img-top mx-auto mt-3 rounded-circle"
+                                style="width: 150px; height: 150px; object-fit: cover;"
+                                alt="Instructor Avatar"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';" />
+
+                <div class="card-body text-center">
+                    <h5 class="card-title text-primary">@Model.Instructor.Name</h5>
+                    <p class="card-text text-muted">@Model.DepartmentName</p>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>ID:</strong> @Model.Instructor.Id</li>
+                    <li class="list-group-item"><strong>Salary:</strong> @Model.Instructor.Salary.ToString("C0")</li>
+                    <li class="list-group-item"><strong>Address:</strong> @Model.Instructor.Address</li>
+                </ul>
+
+                <div class="card-footer">
+                    <a asp-action="Index" class="btn btn-secondary btn-sm">Back to List</a>
+                    <a asp-action="Edit" asp-route-id="@Model.Instructor.Id" class="btn btn-warning btn-sm float-end">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7">
+            <div class="card shadow">
+                <div class="card-header bg-light">
+                    <h4>Account & Security Status</h4>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">Account Linked?</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.IsAccountLinked)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No - Profile only</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4">Login Username</dt>
+                        <dd class="col-sm-8">@(Model.UserName ?? "N/A")</dd>
+
+                        <dt class="col-sm-4">Assigned Role(s)</dt>
+                        <dd class="col-sm-8">
+                            @if (Model.Roles.Any())
+                            {
+                                @string.Join(", ", Model.Roles)
+                            }
+                            else
+                            {
+                                <span>(None assigned)</span>
+                            }
+                        </dd>
+                        <dt class="col-sm-4">Identity GUID</dt>
+                        <dd class="col-sm-8 text-monospace small">@(Model.UserId ?? "N/A")</dd>
+                    </dl>
+
+                    @* --- ADMIN PASSWORD RESET FORM/BUTTON (WITH CONFIRMATION) --- *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("Hr"))
+                    {
+                        @if (Model.IsAccountLinked)
+                        {
+                            <hr />
+                            <h5 class="text-danger">Admin Password Reset</h5>
+                            <form id="resetPassForm" asp-action="ResetUserPassword" asp-controller="Instructors" method="post" onsubmit="return validatePasswordReset(event);">
+
+                                <input type="hidden" name="userId" value="@Model.UserId" />
+
+                                <div class="mb-2">
+                                    <label for="newPassword" class="form-label visually-hidden">New Password</label>
+                                    <input type="password"
+                                                                 id="newPassword"
+                                                                 name="newPassword"
+                                                                 class="form-control"
+                                                                 placeholder="Enter New Temporary Password"
+                                                                 required
+                                                                 minlength="6" />
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <input type="password"
+                                                                 id="confirmPassword"
+                                                                 class="form-control"
+                                                                 placeholder="Confirm New Password"
+                                                                 required />
+
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-key me-1"></i> Reset Password
+                                    </button>
+                                </div>
+                                <p id="passwordMismatchError" class="text-danger small" style="display:none;">
+                                    New password and confirmation password must match.
+                                </p>
+                                <small class="text-muted">
+                                    This action immediately sets a new password, bypassing the old one.
+                                </small>
+                            </form>
+
+                            <script>
+                                function validatePasswordReset(event) {
+                                    const newPass = document.getElementById('newPassword').value;
+                                    const confirmPass = document.getElementById('confirmPassword').value;
+                                    const errorElement = document.getElementById('passwordMismatchError');
+
+                                    if (newPass !== confirmPass) {
+                                        errorElement.style.display = 'block';
+                                        event.preventDefault();
+                                        return false;
+                                    }
+
+                                    errorElement.style.display = 'none';
+                                    return confirm('WARNING: Are you sure you want to reset the password for this user? This cannot be undone.');
+                                }
+                            </script>
+                        }
+                    }
+                    @* --- END PASSWORD RESET --- *@
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,36 +1,426 @@
 ﻿@model ItiProject_ms1.Views.ViewModel.StudentDeptViewModel
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th>#</th>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Grade</th>
-            <th>Department</th>
-            <th>Actions</th>
-        </tr>
-        <tr>
-            <a asp-action="AddStud" class="btn btn-success">Add Student</a>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var s in Model.students)
-        {
-            <tr>
-                <td>@s.Id</td>
-                <td><img src="@s.ImagePath" width="60" height="60" /></td>
-                <td>@s.Name</td>
-                <td>@s.Address</td>
-                <td>@s.Grade</td>
-                <td>@Model.departments.FirstOrDefault(d => d.Id == s.DeptId)?.Name</td>
-                <td>
-                    <a href="/Student/UpdateStud/@s.Id" class="btn btn-warning">Update</a>
-                    <a href="/Student/deleteStud/@s.Id" class="btn btn-danger">Delete</a>
-                    <a href="/Student/ShowInfo/@s.Id" class="btn btn-success">Show Info</a>
-                </td>
-            </tr>
+@{
+    ViewData["Title"] = "Student Management";
+}
+
+<style>
+    /* General Body and Container Styling */
+    body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+    }
+
+    .main-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    /* Header Styling */
+    .header-content {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-icon {
+        background-color: #5d50e6;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-text h1 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 0;
+    }
+
+    .header-text p {
+        font-size: 0.875rem;
+        color: #718096;
+        margin-top: -0.25rem;
+    }
+
+    /* Search and Add Button Area */
+    .search-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-input-container {
+        flex-grow: 1;
+        margin-right: 1rem;
+        position: relative;
+        max-width: 400px;
+    }
+
+        .search-input-container input {
+            padding-left: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
         }
-    </tbody>
-</table>
+
+    /* Add Student Button */
+    .btn-add-student {
+        background-color: #5d50e6;
+        border-color: #5d50e6;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+        .btn-add-student:hover {
+            background-color: #4a3eaf;
+            border-color: #4a3eaf;
+        }
+
+    /* Table Styling */
+    .table {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .table th {
+            color: #718096;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        .table td {
+            font-size: 0.9375rem;
+            color: #2d3748;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f7fafc;
+        }
+
+    /* Student Name Cell Mockup (to mimic icon/avatar) */
+    .student-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .avatar-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #a0aec0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    /* Grade/Score Styling */
+    .grade-pill {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-align: center;
+        min-width: 50px;
+    }
+
+    .grade-danger {
+        background-color: #fcebeb;
+        color: #e53e3e;
+        border: 1px solid #f9caca;
+    }
+
+    .grade-success {
+        background-color: #e6fffa;
+        color: #38b2ac;
+        border: 1px solid #b2f5ea;
+    }
+
+    .grade-warning {
+        background-color: #fffbeb;
+        color: #d97706;
+        border: 1px solid #fbd38d;
+    }
+
+    .grade-info {
+        background-color: #ebf8ff;
+        color: #4299e1;
+        border: 1px solid #90cdf4;
+    }
+
+    /* Action Buttons */
+    .btn-sm {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.875rem;
+        margin-left: 0.25rem;
+    }
+
+    .btn-update {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-delete {
+        background-color: #e53e3e;
+        border-color: #e53e3e;
+        color: white;
+    }
+
+    .btn-details {
+        background-color: #38b2ac;
+        border-color: #38b2ac;
+    }
+
+    /* Pagination/Footer */
+    .pagination-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-top: 1px solid #e2e8f0;
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        color: #4a5568;
+    }
+
+    .pagination-controls button {
+        background-color: white;
+        border: 1px solid #e2e8f0;
+        color: #4a5568;
+        padding: 0.2rem 0.6rem;
+        border-radius: 0.25rem;
+        margin-left: 0.25rem;
+        font-weight: 500;
+    }
+
+    .pagination-controls .active {
+        background-color: #5d50e6;
+        border-color: #5d50e6;
+        color: white;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="container my-5">
+    <div class="main-card">
+
+        <div class="header-content">
+            <div class="header-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Student Management</h1>
+                <p>Manage and organize student information</p>
+            </div>
+        </div>
+
+        <div class="search-area">
+            <div class="search-input-container">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by student name..." onkeyup="filterAndPaginate()">
+            </div>
+
+            <a asp-action="AddStud" asp-controller="Student" class="btn btn-primary btn-add-student">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16" style="margin-right: 0.25rem;">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+                Add Student
+            </a>
+        </div>
+
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 25%;">Student</th>
+                    <th style="width: 30%;">Address</th>
+                    <th style="width: 10%;">Grade</th>
+                    <th style="width: 15%;">Department</th>
+                    <th style="width: 15%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                @foreach (var item in Model.students)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td data-search="@item.Name">
+                            <div class="student-cell">
+                                <div class="avatar-circle" style="background-color: #5d50e6;">
+                                    @{
+                                        var initial = item.Name.Split(' ').FirstOrDefault()?.Substring(0, 1).ToUpper() ?? "S";
+                                    }
+                                    @initial
+                                </div>
+                                @item.Name
+                            </div>
+                        </td>
+                        <td>@item.Address</td>
+                        <td>
+                            @{
+                                string gradeClass;
+                                // Example grade logic based on screenshot colors:
+                                if (item.Grade >= 90) { gradeClass = "grade-success"; } // Green (92.0)
+                                else if (item.Grade >= 80) { gradeClass = "grade-info"; }    // Blue (85.0)
+                                else if (item.Grade >= 70) { gradeClass = "grade-warning"; } // Yellow (78.0)
+                                else { gradeClass = "grade-danger"; } // Red
+                            }
+                            <span class="grade-pill @gradeClass">
+                                @item.Grade.ToString("N1")
+                            </span>
+                        </td>
+                        <td>
+                            @Model.departments.FirstOrDefault(d => d.Id == item.DeptId)?.Name
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="UpdateStud" asp-route-id="@item.Id" class="btn btn-warning btn-sm btn-update text-white">
+                                    <i class="fa-solid fa-pen-to-square me-1"></i>Update
+                                </a>
+
+                                <a asp-action="deleteStud"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm btn-delete text-white"
+                                   onclick="return confirm('Are you sure you want to delete student: @item.Name?');">
+                                    <i class="fa-solid fa-trash me-1"></i>Delete
+                                </a>
+
+                                <a asp-action="ShowInfo" asp-route-id="@item.Id" class="btn btn-success btn-sm btn-details text-white">
+                                    <i class="fa-solid fa-eye me-1"></i>Details
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination-footer">
+            <div class="d-flex align-items-center">
+                Show
+                <select id="pageSizeSelect" class="form-select form-select-sm mx-2" style="width: 70px;" onchange="filterAndPaginate()">
+                    <option value="5" selected>5</option>
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                </select>
+                per page
+            </div>
+            <div id="footerStatus">
+                Showing 1 to @(Model.students.Count() > 5 ? 5 : Model.students.Count()) of @Model.students.Count() students
+            </div>
+            <div id="paginationControls" class="pagination-controls">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial load of the table
+            filterAndPaginate();
+        });
+
+        let currentPage = 1;
+
+        // This combines search filtering and page display logic
+        function filterAndPaginate(page = 1) {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const pageSize = parseInt(document.getElementById('pageSizeSelect').value);
+            const tableBody = document.getElementById('studentTableBody');
+            const allRows = Array.from(tableBody.getElementsByTagName('tr'));
+
+            // 1. FILTER ROWS
+            const filteredRows = allRows.filter(row => {
+                // Check all visible columns' text content for a match
+                const rowText = Array.from(row.getElementsByTagName('td')).map(td => td.textContent.toUpperCase()).join(' ');
+                const matchesFilter = rowText.includes(filter);
+                return matchesFilter;
+            });
+
+            const totalItems = filteredRows.length;
+            const totalPages = Math.ceil(totalItems / pageSize);
+
+            // Adjust current page if necessary (e.g., if search reduces pages)
+            currentPage = Math.min(page, totalPages > 0 ? totalPages : 1);
+
+            const startIdx = (currentPage - 1) * pageSize;
+            const endIdx = startIdx + pageSize;
+
+            // 2. DISPLAY PAGINATED ROWS
+            allRows.forEach(row => row.style.display = 'none'); // Hide all first
+
+            for (let i = 0; i < filteredRows.length; i++) {
+                if (i >= startIdx && i < endIdx) {
+                    filteredRows[i].style.display = ''; // Show only rows for the current page
+                }
+            }
+
+            // 3. UPDATE PAGINATION UI
+            updatePaginationControls(totalPages);
+            updateFooterStatus(startIdx, Math.min(endIdx, totalItems), totalItems);
+        }
+
+        function updatePaginationControls(totalPages) {
+            const controlsDiv = document.getElementById('paginationControls');
+            controlsDiv.innerHTML = ''; // Clear existing controls
+
+            // Previous Button
+            const prevDisabled = currentPage === 1;
+            controlsDiv.innerHTML += `<button onclick="filterAndPaginate(${currentPage - 1})" ${prevDisabled ? 'disabled' : ''}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+            </button>`;
+
+            // Page Number Buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const isActive = i === currentPage ? 'active' : '';
+                controlsDiv.innerHTML += `<button class="${isActive}" onclick="filterAndPaginate(${i})">${i}</button>`;
+            }
+
+            // Next Button
+            const nextDisabled = currentPage === totalPages || totalPages === 0;
+            controlsDiv.innerHTML += `<button onclick="filterAndPaginate(${currentPage + 1})" ${nextDisabled ? 'disabled' : ''}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+            </button>`;
+        }
+
+        function updateFooterStatus(start, end, total) {
+            const footer = document.getElementById('footerStatus');
+            if (total === 0) {
+                footer.textContent = 'No students found.';
+            } else {
+                footer.textContent = `Showing ${start + 1} to ${end} of ${total} students`;
+            }
+        }
+    </script>
+}

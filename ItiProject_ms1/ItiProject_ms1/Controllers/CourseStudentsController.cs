@@ -1,87 +1,126 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ItiProject_ms1.Models;
+using ItiProject_ms1.Repository;
+using ItiProject_ms1.Views.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ItiProject_ms1.Models;
+using System.Linq;
 
 namespace ItiProject_ms1.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CourseStudentsController : Controller
     {
-        public UniDbContext context = new UniDbContext();
+        private readonly IBaseRepository<CourseStudents> _csRepo;
+        private readonly IBaseRepository<Course> _courseRepo;
+        private readonly IBaseRepository<Student> _studentRepo;
 
-        // GET: Courses
-        public async Task<IActionResult> Index()
+        public CourseStudentsController(
+            IBaseRepository<CourseStudents> csRepo,
+            IBaseRepository<Course> courseRepo,
+            IBaseRepository<Student> studentRepo)
         {
-            var lst = await context.CourseStudents.ToListAsync();
+            _csRepo = csRepo;
+            _courseRepo = courseRepo;
+            _studentRepo = studentRepo;
+        }
+
+        // GET: CourseStudents
+        public IActionResult Index()
+        {
+            var lst = _csRepo.GetAll()
+                             .Select(cs => new CourseStudents
+                             {
+                                 Id = cs.Id,
+                                 CrsId = cs.CrsId,
+                                 StdId = cs.StdId,
+                                 Degree = cs.Degree,
+                                 Course = _courseRepo.GetByID(cs.CrsId),
+                                 Student = _studentRepo.GetByID(cs.StdId)
+                             }).ToList();
+
             return View(lst);
         }
 
-        // GET: Courses/Details/5
-        public async Task<IActionResult> Details(int id)
+        // GET: CourseStudents/Details/5
+        public IActionResult Details(int id)
         {
-            var d = await context.CourseStudents.FirstOrDefaultAsync(d => d.Id == id);
-            return View(d);
+            var cs = _csRepo.GetByID(id);
+            if (cs == null) return NotFound();
+
+            cs.Course = _courseRepo.GetByID(cs.CrsId);
+            cs.Student = _studentRepo.GetByID(cs.StdId);
+
+            return View(cs);
         }
 
-        // GET: Courses/Create
+        // GET: CourseStudents/Create
         public IActionResult Create()
         {
-            CourseStudents ins = new CourseStudents();
-            return View(ins);
+            var model = new CourseStudentViewModel
+            {
+                courseStudents = new CourseStudents(),
+                courses = _courseRepo.GetAll(),
+                students = _studentRepo.GetAll()
+            };
+            return View(model);
         }
 
-        // POST: Courses/Create
+        // POST: CourseStudents/Create
         [HttpPost]
-        public async Task<IActionResult> Create(CourseStudents ins)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(CourseStudentViewModel model)
         {
             if (ModelState.IsValid)
             {
-                context.Add(ins);
-                await context.SaveChangesAsync();
-                return RedirectToAction("Index");
+                _csRepo.Add(model.courseStudents);
+                return RedirectToAction(nameof(Index));
             }
-            return View(ins);
+
+            model.courses = _courseRepo.GetAll();
+            model.students = _studentRepo.GetAll();
+            return View(model);
         }
 
-        // GET: Courses/Edit/5
+        // GET: CourseStudents/Edit/5
         public IActionResult Edit(int id)
         {
-            var ins = context.CourseStudents.FirstOrDefault(d => d.Id == id);
-            if (ins == null) return NotFound();
-            return View("Edit", ins);
+            var cs = _csRepo.GetByID(id);
+            if (cs == null) return NotFound();
+
+            var model = new CourseStudentViewModel
+            {
+                courseStudents = cs,
+                courses = _courseRepo.GetAll(),
+                students = _studentRepo.GetAll()
+            };
+            return View("Edit", model);
         }
 
-        // POST: Courses/Edit/5
+        // POST: CourseStudents/Edit/5
         [HttpPost]
-        public async Task<IActionResult> Edit(CourseStudents updatedins)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(CourseStudentViewModel model)
         {
-            var ins = await context.CourseStudents.FirstOrDefaultAsync(d => d.Id == updatedins.Id);
-            if (ins != null)
+            if (ModelState.IsValid)
             {
-                ins.Student= updatedins.Student;
-                ins.Course = updatedins.Course;
-                ins.CrsId= updatedins.CrsId;
-                ins.StdId= updatedins.StdId;
-                ins.Degree = updatedins.Degree;
-                await context.SaveChangesAsync();
+                _csRepo.Update(model.courseStudents);
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction("Index");
+
+            model.courses = _courseRepo.GetAll();
+            model.students = _studentRepo.GetAll();
+            return View("Edit", model);
         }
 
-        // GET: Courses/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        // GET: CourseStudents/Delete/5
+        public IActionResult Delete(int id)
         {
-            var d = await context.CourseStudents.FirstOrDefaultAsync(d => d.Id == id);
-            if (d != null)
+            var cs = _csRepo.GetByID(id);
+            if (cs != null)
             {
-                context.CourseStudents.Remove(d);
-                await context.SaveChangesAsync();
+                _csRepo.Delete(cs);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }

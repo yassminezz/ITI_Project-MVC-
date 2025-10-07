@@ -1,17 +1,56 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using System;
 namespace ItiProject_ms1.Models
 {
-    public class UniDbContext:DbContext
+    public class UniDbContext :IdentityDbContext<IdentityUser>
     {
-      public DbSet<Department> departments {  get; set; }
-        public DbSet<Course> courses { get; set; }
-        public DbSet<CourseStudents> CourseStudents { get; set; }
-        public DbSet<Instructor> instructors { get; set; }
-        public DbSet<Student>students { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public UniDbContext(DbContextOptions<UniDbContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=ITI_Project;Trusted_Connection=True;Encrypt=False");
+        }
+
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseStudents> CourseStudents { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<Student> Students { get; set; }
+        //public DbSet<User>Users { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<IdentityRole>().HasData(
+                 new IdentityRole
+                 {
+                     Id = Guid.NewGuid().ToString(),
+                     Name = "Admin",
+                     NormalizedName = "admin",
+                     ConcurrencyStamp = Guid.NewGuid().ToString()
+                 },
+                new IdentityRole
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Hr",
+                    NormalizedName = "hr",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                },
+                new IdentityRole
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Instructor",
+                    NormalizedName = "instructor",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                },
+                new IdentityRole
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Name = "Student",
+                    NormalizedName = "student",
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                } );
+
         }
     }
 }

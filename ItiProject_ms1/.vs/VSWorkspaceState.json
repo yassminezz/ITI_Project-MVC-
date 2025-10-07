@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ItiProject_ms1",
+    "\\ItiProject_ms1\\Models",
+    "\\ItiProject_ms1\\Views",
+    "\\ItiProject_ms1\\Views\\Courses",
+    "\\ItiProject_ms1\\Views\\CourseStudents",
+    "\\ItiProject_ms1\\Views\\Departments",
+    "\\ItiProject_ms1\\Views\\Instructors",
+    "\\ItiProject_ms1\\Views\\Student"
+  ],
+  "SelectedNode": "\\ItiProject_ms1\\Views\\Departments\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

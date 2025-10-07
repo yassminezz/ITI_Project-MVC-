@@ -1,43 +1,76 @@
-﻿@model ItiProject_ms1.Models.Instructor
+﻿@model ItiProject_ms1.Views.ViewModel.InstDeptUserViewModel
+@* NOTE: The model is now InstDeptUserViewModel *@
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Instructor";
 }
 
-<h1>Create</h1>
+<h1>Create Instructor</h1>
 
-<h4>Instructor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post">
+            @* Assuming your POST action is named 'Create' *@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @* --- INSTRUCTOR PROFILE FIELDS (Binding to Model.Instructor) --- *@
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Instructor.Name" class="control-label"></label>
+                <input asp-for="Instructor.Name" class="form-control" />
+                <span asp-validation-for="Instructor.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Salary" class="control-label"></label>
-                <input asp-for="Salary" class="form-control" />
-                <span asp-validation-for="Salary" class="text-danger"></span>
+                <label asp-for="Instructor.Salary" class="control-label"></label>
+                <input asp-for="Instructor.Salary" class="form-control" />
+                <span asp-validation-for="Instructor.Salary" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label asp-for="Instructor.Address" class="control-label"></label>
+                <input asp-for="Instructor.Address" class="form-control" />
+                <span asp-validation-for="Instructor.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImagePath" class="control-label"></label>
-                <input asp-for="ImagePath" class="form-control" />
-                <span asp-validation-for="ImagePath" class="text-danger"></span>
+                <label asp-for="Instructor.ImagePath" class="control-label"></label>
+                <input asp-for="Instructor.ImagePath" class="form-control" />
+                <span asp-validation-for="Instructor.ImagePath" class="text-danger"></span>
+            </div>
+
+            @* --- DEPARTMENT DROPDOWN (Binding to Model.Instructor.DeptId) --- *@
+            <div class="form-group">
+                <label asp-for="Instructor.DeptId" class="control-label">Department</label>
+                <select asp-for="Instructor.DeptId"
+                        class="form-control"
+                        asp-items="@(new SelectList(Model.Departments, "Id", "Name", Model.Instructor.DeptId))">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="Instructor.DeptId" class="text-danger"></span>
+            </div>
+
+            @* --- NEW IDENTITY FIELDS (Required for login creation) --- *@
+            <h5 class="mt-4">Login Credentials</h5>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeptId" class="control-label"></label>
-                <input asp-for="DeptId" class="form-control" />
-                <span asp-validation-for="DeptId" class="text-danger"></span>
+                <label asp-for="SelectedRole" class="control-label"></label>
+                <select asp-for="SelectedRole"
+                        class="form-control"
+                        asp-items="@Model.AvailableRoles">
+                    <option value="">-- Select Role --</option>
+                </select>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
             </div>
-            <div class="form-group">
+
+            <div class="form-group mt-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
@@ -49,5 +82,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

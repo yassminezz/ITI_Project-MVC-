@@ -1,4 +1,4 @@
-﻿@model ItiProject_ms1.Models.CourseStudents
+﻿@model ItiProject_ms1.Views.ViewModel.CourseStudentViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,22 +12,34 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="courseStudents.Id" />
+
             <div class="form-group">
-                <label asp-for="Degree" class="control-label"></label>
-                <input asp-for="Degree" class="form-control" />
-                <span asp-validation-for="Degree" class="text-danger"></span>
+                <label asp-for="courseStudents.Degree" class="control-label"></label>
+                <input asp-for="courseStudents.Degree" class="form-control" />
+                <span asp-validation-for="courseStudents.Degree" class="text-danger"></span>
             </div>
+
+            <!-- Course dropdown -->
             <div class="form-group">
-                <label asp-for="CrsId" class="control-label"></label>
-                <select asp-for="CrsId" class="form-control" asp-items="ViewBag.CrsId"></select>
-                <span asp-validation-for="CrsId" class="text-danger"></span>
+                <label asp-for="courseStudents.CrsId" class="control-label"></label>
+                <select asp-for="courseStudents.CrsId" class="form-control"
+                        asp-items="@(new SelectList(Model.courses, "Id", "Name", Model.courseStudents.CrsId))">
+                    <option value="">-- Select Course --</option>
+                </select>
+                <span asp-validation-for="courseStudents.CrsId" class="text-danger"></span>
             </div>
+
+            <!-- Student dropdown -->
             <div class="form-group">
-                <label asp-for="StdId" class="control-label"></label>
-                <select asp-for="StdId" class="form-control" asp-items="ViewBag.StdId"></select>
-                <span asp-validation-for="StdId" class="text-danger"></span>
+                <label asp-for="courseStudents.StdId" class="control-label"></label>
+                <select asp-for="courseStudents.StdId" class="form-control"
+                        asp-items="@(new SelectList(Model.students, "Id", "Name", Model.courseStudents.StdId))">
+                    <option value="">-- Select Student --</option>
+                </select>
+                <span asp-validation-for="courseStudents.StdId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -40,5 +52,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

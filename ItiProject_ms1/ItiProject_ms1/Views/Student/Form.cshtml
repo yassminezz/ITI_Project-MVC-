@@ -1,4 +1,5 @@
 ﻿@model ItiProject_ms1.Views.ViewModel.StudDeptViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
 
 @if (Model?.student.Id == 0)
 {
@@ -10,51 +11,75 @@ else
 }
 
 <form asp-action="@(Model?.student.Id == 0 ? "AddStud" : "UpdateStud")" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
     <div class="form-group">
         <label asp-for="@Model.student.Id"></label>
         <input asp-for="@Model.student.Id" class="form-control" readonly />
+        <span class="text-danger" asp-validation-for="@Model.student.Id"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="@Model.student.Name"></label>
         <input asp-for="@Model.student.Name" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.student.Name"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="@Model.student.Address"></label>
         <input asp-for="@Model.student.Address" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.student.Address"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="@Model.student.Grade"></label>
         <input asp-for="@Model.student.Grade" class="form-control" />
+        <span class="text-danger" asp-validation-for="@Model.student.Grade"></span>
     </div>
 
-    @*   <div class="form-group">
-        <label asp-for="DeptId"></label>
-        <input asp-for="DeptId" class="form-control" />
-    </div> *@
+    @* --- IDENTITY CREATION FIELDS (Only show on Add/Create) --- *@
+    @if (Model?.student.Id == 0)
+    {
+        <h4 class="mt-4">Login Credentials</h4>
+
+        <div class="form-group">
+            <label asp-for="UserName"></label>
+            <input asp-for="UserName" class="form-control" />
+            <span class="text-danger" asp-validation-for="UserName"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SelectedRole"></label>
+            <select asp-for="SelectedRole"
+                    class="form-control"
+                    asp-items="@Model.AvailableRoles">
+                <option value="">-- Select Role --</option>
+            </select>
+            <span class="text-danger" asp-validation-for="SelectedRole"></span>
+        </div>
+    }
+    @* ----------------------------------------------------------- *@
+
     <div class="ayhaga mt-3">
         <label>Departments </label>
-        <select asp-for="student.DeptId" class="form-control">
-            @foreach (var dept in Model.departments)
-            {
-                if (dept.Id == Model.student.DeptId)
-                {
-                    <option value="@dept.Id" selected="selected">@dept.Name</option>
-                }
-                else
-                {
-                    <option value="@dept.Id">@dept.Name</option>
-                }
-            }
+        <select asp-for="student.DeptId"
+                class="form-control"
+                asp-items="@(new SelectList(Model.departments, "Id", "Name", Model.student.DeptId))">
+            <option value="">-- Select Department --</option>
         </select>
+        <span class="text-danger" asp-validation-for="student.DeptId"></span>
     </div>
-
-
-
 
     <button type="submit" class="btn btn-primary mt-3">
         @(Model?.student.Id == 0 ? "Add" : "Update")
     </button>
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

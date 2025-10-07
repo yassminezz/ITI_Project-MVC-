@@ -1,61 +1,342 @@
-﻿@model IEnumerable<ItiProject_ms1.Models.Instructor>
+﻿@model ItiProject_ms1.Views.ViewModel.InstsDepts
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Instructors Management";
 }
 
-<h1>Index</h1>
+<style>
+    /* General Body and Container Styling */
+    body {
+        background-color: #f7f9fc; /* Lighter background like the image */
+        font-family: Arial, sans-serif;
+    }
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Add Instructor</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Salary)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeptId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    <img src="@item.ImagePath" alt="No Image" />
+    .main-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        padding: 2rem;
+        margin-top: 2rem;
+    }
 
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Salary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.DeptId)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Update</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-danger">Show Info</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-success">Delete</a>
-            </td>
-        </tr>
+    /* Header Styling */
+    .header-content {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-icon {
+        background-color: #5d50e6; /* The purple background for the icon */
+        color: white;
+        padding: 0.5rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-text h1 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a202c; /* Dark text color */
+        margin-bottom: 0;
+    }
+
+    .header-text p {
+        font-size: 0.875rem;
+        color: #718096; /* Gray subtitle color */
+        margin-top: -0.25rem;
+    }
+
+    /* Search and Add Button Area */
+    .search-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-input-container {
+        flex-grow: 1;
+        margin-right: 1rem;
+        position: relative;
+        max-width: 400px; /* Limit search bar width */
+    }
+
+        .search-input-container input {
+            padding-left: 2.5rem; /* Space for the search icon */
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
+        }
+
+    .search-icon {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #a0aec0;
+    }
+
+    /* Add Button */
+    .btn-add-entity {
+        background-color: #5d50e6; /* Purple button color */
+        border-color: #5d50e6;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        display: flex; /* To align icon and text */
+        align-items: center;
+    }
+
+        .btn-add-entity:hover {
+            background-color: #4a3eaf;
+            border-color: #4a3eaf;
+        }
+
+    /* Table Styling */
+    .table {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .table th {
+            color: #718096; /* Header text color */
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        .table td {
+            font-size: 0.9375rem;
+            color: #2d3748;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem; /* Increased padding */
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f7fafc;
+        }
+
+    /* Instructor Name Cell Mockup (combining ImagePath with Name) */
+    .instructor-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .instructor-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0.75rem;
+        border: 1px solid #e2e8f0;
+        flex-shrink: 0; /* Prevents image from shrinking */
+    }
+
+    /* Grade/Salary Pill Styling */
+    .salary-pill {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px; /* Pill shape */
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-align: center;
+        min-width: 70px; /* Adjusted width for salary */
+    }
+
+    /* Example salary colors - adjust based on your logic (e.g., high vs. low salary) */
+    .salary-high {
+        background-color: #e6fffa; /* Light teal/green background */
+        color: #38b2ac; /* Darker teal/green text */
+        border: 1px solid #b2f5ea;
+    }
+
+    .salary-medium {
+        background-color: #fffbdd; /* Light yellow background */
+        color: #d69e2e; /* Darker yellow text */
+        border: 1px solid #fbd38d;
+    }
+
+    /* Action Buttons - Matching screenshot colors */
+    .btn-sm {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.875rem;
+        margin-left: 0.25rem;
+    }
+
+    .btn-update { /* Yellow Update */
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-delete { /* Red Delete */
+        background-color: #e53e3e;
+        border-color: #e53e3e;
+    }
+
+    .btn-details { /* Green Details */
+        background-color: #38b2ac;
+        border-color: #38b2ac;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="container my-5">
+    <div class="main-card">
+
+        <div class="header-content">
+            <div class="header-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-person-badge-fill" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Instructor Management</h1>
+                <p>Manage and organize instructor information</p>
+            </div>
+        </div>
+
+        <div class="search-area">
+            <div class="search-input-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-search search-icon" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                </svg>
+                <input type="text" id="searchInput" class="form-control" placeholder="Search by instructor name..." onkeyup="filterTable()">
+            </div>
+
+            <a asp-action="Create" class="btn btn-primary btn-add-entity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16" style="margin-right: 0.25rem;">
+                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                </svg>
+                Add Instructor
+            </a>
+        </div>
+
+        <table id="instructorsTable" class="table align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Instructor</th>
+                    <th style="width: 25%;">@Html.DisplayNameFor(model => model.instructors.First().Address)</th>
+                    <th style="width: 15%;">@Html.DisplayNameFor(model => model.instructors.First().Salary)</th>
+                    <th style="width: 15%;">Department</th>
+                    <th style="width: 15%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="instructorTableBody">
+                @foreach (var item in Model.instructors)
+                {
+                    <tr>
+                        <td>
+                            <div class="instructor-cell">
+                                <img src="@Url.Content(item.ImagePath)"
+                                     alt="@item.Name Avatar"
+                                     class="instructor-avatar"
+                                     onerror="this.onerror=null; this.src='@Url.Content("~/path/to/default/avatar.webp")';"> @item.Name
+                            </div>
+                        </td>
+                        <td>@item.Address</td>
+                        <td>
+                            @{
+                                var salaryClass = item.Salary > 50000 ? "salary-high" : "salary-medium";
+                            }
+                            <span class="salary-pill @salaryClass">
+                                $@item.Salary.ToString("N0")
+                            </span>
+                        </td>
+                        <td>
+                            @Model.depts.FirstOrDefault(d => d.Id == item.DeptId)?.Name
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-update btn-sm text-white">
+                                    <i class="fa-solid fa-pen-to-square me-1"></i>Update
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-delete btn-sm text-white"
+                                   onclick="return confirm('Are you sure you want to delete instructor: @item.Name?');">
+                                    <i class="fa-solid fa-trash me-1"></i>Delete
+                                </a>
+
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-details btn-sm text-white">
+                                    <i class="fa-solid fa-eye me-1"></i>Details
+                                </a>
+                            </div>
+                          
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="pagination-footer">
+            <div id="footerStatus">
+                Showing 1 to @Model.instructors.Count() of @Model.instructors.Count() instructors
+            </div>
+            <div class="pagination-controls">
+                <button disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" /></svg>
+                </button>
+                <button class="active">1</button>
+                <button disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" /></svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function filterTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const tableBody = document.getElementById('instructorTableBody');
+            const tr = tableBody.getElementsByTagName('tr');
+            let visibleRowCount = 0;
+            const totalRows = @Model.instructors.Count();
+
+            for (let i = 0; i < tr.length; i++) {
+                // Instructor Name is in the first TD (index 0)
+                const nameCell = tr[i].getElementsByTagName('td')[0];
+
+                if (nameCell) {
+                    // Look for the name text inside the cell (which contains the avatar and name)
+                    const txtValue = nameCell.textContent || nameCell.innerText;
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = ''; // Show the row
+                        visibleRowCount++;
+                    } else {
+                        tr[i].style.display = 'none'; // Hide the row
+                    }
+                }
+            }
+
+            // Update the pagination footer text based on search results
+            const footer = document.getElementById('footerStatus');
+            if (footer) {
+                if (filter === "") {
+                    // No filter applied (default state)
+                    footer.textContent = `Showing 1 to ${visibleRowCount} of ${totalRows} instructors`;
+                } else {
+                    // Filter applied
+                    footer.textContent = `Showing ${visibleRowCount} matching instructor(s)`;
+                }
+            }
+        }
+    </script>
+
 }
-    </tbody>
-</table>

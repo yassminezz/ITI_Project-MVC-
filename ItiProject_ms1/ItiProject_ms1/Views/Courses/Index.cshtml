@@ -1,59 +1,359 @@
-﻿@model IEnumerable<ItiProject_ms1.Models.Course>
+﻿@model ItiProject_ms1.Views.ViewModel.CrssDeptssViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Courses Management";
 }
 
-<h1>Index</h1>
+<!-- BEGIN Custom Styles (To be included in your site's main CSS/Layout) -->
+<style>
+    /* General Body and Container Styling */
+    body {
+        background-color: #f7f9fc;
+        font-family: Arial, sans-serif;
+    }
 
-<p>
-    <a asp-action="Create" class="btn btn-success">Add Course</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Degree)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinimumDegree)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeptId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Degree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinimumDegree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeptId)
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Update</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-danger">Show Info</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class=" btn btn-success">Delete</a>
-            </td>
-        </tr>
+    .main-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+
+    /* Header Styling */
+    .header-content {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .header-icon {
+        background-color: #5d50e6;
+        color: white;
+        padding: 0.5rem;
+        border-radius: 50%;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-text h1 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 0;
+    }
+
+    .header-text p {
+        font-size: 0.875rem;
+        color: #718096;
+        margin-top: -0.25rem;
+    }
+
+    /* Search and Add Button Area */
+    .search-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .search-input-container {
+        flex-grow: 1;
+        margin-right: 1rem;
+        position: relative;
+        max-width: 400px;
+    }
+
+        .search-input-container input {
+            padding-left: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e2e8f0;
+        }
+
+    /* Add Course Button */
+    .btn-add-entity {
+        background-color: #5d50e6;
+        border-color: #5d50e6;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+    }
+
+        .btn-add-entity:hover {
+            background-color: #4a3eaf;
+            border-color: #4a3eaf;
+        }
+
+    /* Table Styling */
+    .table {
+        margin-bottom: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+        .table th {
+            color: #718096;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-bottom: 2px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            vertical-align: middle;
+        }
+
+        .table td {
+            font-size: 0.9375rem;
+            color: #2d3748;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f7fafc;
+        }
+
+    /* Course Name Cell Mockup */
+    .course-cell {
+        display: flex;
+        align-items: center;
+    }
+
+    .course-icon-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #a0aec0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        margin-right: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    /* Degree/Hours Pill Styling */
+    .pill {
+        display: inline-block;
+        padding: 0.2rem 0.6rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        text-align: center;
+        min-width: 50px;
+    }
+
+    .pill-degree {
+        background-color: #fffbeb; /* Yellow-ish */
+        color: #d97706;
+    }
+
+    .pill-min-degree {
+        background-color: #ebf8ff; /* Blue-ish */
+        color: #4299e1;
+    }
+
+    .pill-hours {
+        background-color: #ecfdf5; /* Green-ish */
+        color: #059669;
+    }
+
+    /* Action Buttons - Matching screenshot colors */
+    .btn-sm {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.875rem;
+        margin-left: 0.25rem;
+    }
+
+    .btn-update {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-delete {
+        background-color: #e53e3e;
+        border-color: #e53e3e;
+        color: white;
+    }
+
+    .btn-details {
+        background-color: #38b2ac;
+        border-color: #38b2ac;
+    }
+
+    /* DataTables Pagination Styling */
+    .dataTables_filter {
+        display: none !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        border: 1px solid #e2e8f0;
+        background-color: white;
+        padding: 0.2rem 0.6rem;
+        margin: 0 0.25rem;
+        border-radius: 0.25rem;
+    }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background-color: #5d50e6 !important;
+            border-color: #5d50e6 !important;
+            color: white !important;
+        }
+</style>
+<!-- END Custom Styles -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<div class="container my-5">
+    <div class="main-card">
+
+        <!-- HEADER SECTION -->
+        <div class="header-content">
+            <div class="header-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
+                    <path d="M8 2.347c.686-.272 1.942-.924 3.257-.924 1.874 0 3.053.946 3.053 2.67v4.613c0 1.724-1.18 2.67-3.053 2.67-1.315 0-2.571-.652-3.257-.924v2.802A2 2 0 0 1 8 16a2 2 0 0 1-2-2.347V2.347z" />
+                    <path d="M6 2.347c-.686-.272-1.942-.924-3.257-.924-1.874 0-3.053.946-3.053 2.67v4.613c0 1.724 1.18 2.67 3.053 2.67 1.315 0 2.571-.652 3.257-.924v2.802A2 2 0 0 1 6 16a2 2 0 0 1-2-2.347V2.347z" />
+                </svg>
+            </div>
+            <div class="header-text">
+                <h1>Course Management</h1>
+                <p>Manage and organize course details and departments</p>
+            </div>
+        </div>
+
+        <!-- SEARCH AND ADD BUTTON SECTION -->
+        <div class="search-area">
+            <div class="search-input-container">
+                <!-- Custom Search Input, linked to DataTables via JS -->
+                <input type="text"
+                       id="globalSearch"
+                       class="form-control"
+                       placeholder="Search by course name or department..." />
+            </div>
+            @if(!User.IsInRole("Instructor")){
+                <a asp-action="Create" class="btn btn-primary btn-add-entity">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16" style="margin-right: 0.25rem;">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                    </svg>
+                    Add Course
+                </a>
+            }
+        
+        </div>
+
+        <!-- DATA TABLE SECTION -->
+        <table id="coursesTable" class="table align-middle w-full">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">@Html.DisplayNameFor(model => model.courses.First().Name)</th>
+                    <th style="width: 15%;">@Html.DisplayNameFor(model => model.courses.First().Degree)</th>
+                    <th style="width: 15%;">@Html.DisplayNameFor(model => model.courses.First().MinimumDegree)</th>
+                    <th style="width: 10%;">@Html.DisplayNameFor(model => model.courses.First().Hours)</th>
+                    <th style="width: 15%;">Department</th>
+                    <th style="width: 20%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.courses)
+                {
+                    <tr>
+                        <td>
+                            <div class="course-cell">
+                                <div class="course-icon-circle" style="background-color: #38b2ac;">C</div>
+                                @item.Name
+                            </div>
+                        </td>
+                        <td><span class="pill pill-degree">@item.Degree</span></td>
+                        <td><span class="pill pill-min-degree">@item.MinimumDegree</span></td>
+                        <td><span class="pill pill-hours">@item.Hours</span></td>
+                        <td>
+                            @Model.departments.FirstOrDefault(d => d.Id == item.DeptId)?.Name
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                @if (User.IsInRole("Admin") || User.IsInRole("Student"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-update text-white">
+                                        <i class="fa-solid fa-pen-to-square me-1"></i>Update
+                                    </a>
+                                }
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-delete text-white"
+                                       onclick="return confirm('Are you sure you want to delete course: @item.Name?');">
+                                        <i class="fa-solid fa-trash me-1"></i>Delete
+                                    </a>
+                                }
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-details text-white">
+                                    <i class="fa-solid fa-eye me-1"></i>Details
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- DataTables Footer Injection Point -->
+        <div id="dataTablesFooter" class="flex justify-between items-center px-0 py-4 border-t border-gray-200 mt-0">
+            <!-- DataTables will inject length menu, info, and pagination here -->
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <!-- jQuery and DataTables are required -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTables
+            var table = $('#coursesTable').DataTable({
+                pageLength: 10,
+                paging: true,
+                searching: true,
+                order: [[0, 'asc']], // Order by Course Name
+
+                // Custom DOM structure to hide default search and structure the footer
+                dom: '<"top"r>t<"bottom"lip>',
+
+                language: {
+                    // Customizing text to fit the visual design
+                    lengthMenu: '<div class="flex items-center gap-2 text-gray-600">Show _MENU_ per page</div>',
+                    info: '<div class="text-gray-600">Showing _START_ to _END_ of _TOTAL_ courses</div>',
+                    paginate: {
+                        previous: '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" /></svg>',
+                        next: '<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" /></svg>'
+                    }
+                }
+            });
+
+            // --- Connect Custom Search Input ---
+            // This is crucial: it links the custom input field to DataTables' filtering mechanism.
+            $('#globalSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
+            // --- Inject DataTables Footer Elements ---
+            // Manually move the generated DataTables footer elements into our custom CSS/HTML container.
+            $('#dataTablesFooter').append(
+                table.tables().container().find('.dataTables_length'),
+                table.tables().container().find('.dataTables_info').addClass('mx-4'),
+                table.tables().container().find('.dataTables_paginate')
+            );
+        });
+    </script>
 }
-    </tbody>
-</table>

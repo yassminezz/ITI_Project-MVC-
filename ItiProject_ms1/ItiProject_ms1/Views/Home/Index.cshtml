@@ -1,8 +1,412 @@
 ﻿@{
+    // CRITICAL: We are using the main site layout now, so we only set the title.
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Custom styles placed inside the View will be rendered inside the main layout's <head> -->
+<style>
+    /* CRITICAL FIX: Ensures elements break out of any max-width/padding imposed by the main layout container */
+    .full-width-content {
+        width: 100vw; /* Take 100% of the viewport width */
+        /* Center the content and pull it left/right to fill the whole screen */
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+
+    /* Adjust the video container height slightly to account for the persistent top navigation bar */
+    .video-container {
+        position: relative;
+        height: 90vh; /* Use 90vh to leave room for the top nav bar, adjust as necessary */
+        overflow: hidden;
+    }
+
+    #bg-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+    }
+
+    .overlay {
+        position: relative;
+        z-index: 1;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .content h6 {
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        color: white;
+    }
+
+    .content h1 {
+        font-family: 'Georgia', serif;
+        font-size: 3rem;
+        line-height: 1.3;
+        color: white;
+    }
+
+    .btn-primary {
+        background-color: #0d4c73;
+        border: none;
+        border-radius: 5px;
+    }
+
+        .btn-primary:hover {
+            background-color: #136b9e;
+        }
+
+    @@media (max-width: 768px) {
+        .content h1 {
+            font-size: 2rem;
+        }
+    }
+
+    /* ========== SECOND SECTION (Building background) ========== */
+    .education-section {
+        position: relative;
+        background-color: #fff;
+        padding: 4rem 2rem;
+        /* Apply full width class definition */
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+
+        .education-section .background-image {
+            background-image: url('https://cdn.cmsfly.com/68e4b26e9a78480012a0c9b8/images/photo-1759299616010-5f7638747587-fPkmu.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-section .blue-box {
+            background-color: #115c73;
+            color: #fff;
+            padding: 3rem;
+            border-radius: 10px;
+            max-width: 600px;
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translateY(-50%);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+        }
+
+        .education-section h6 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #b8e0f2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .education-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            line-height: 1.4;
+        }
+
+        .education-section p {
+            font-size: 1.05rem;
+            color: #eaf8ff;
+        }
+
+        .education-section .btn-light {
+            background-color: #fff;
+            color: #115c73;
+            font-weight: 600;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+            .education-section .btn-light:hover {
+                background-color: #d9f2ff;
+            }
+
+    @@media (max-width: 992px) {
+        .education-section .blue-box {
+            position: static;
+            transform: none;
+            margin-top: 2rem;
+            max-width: 100%;
+        }
+    }
+
+    /* ========== FOOTER STYLES ========== */
+    .main-footer {
+        background-color: #f8f9fa;
+        padding: 4rem 0;
+        color: #343a40;
+        /* Apply full width fix here */
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+    /* Rest of the footer styles... */
+    .footer-logo h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-logo p {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+
+    .contact-btn {
+        background-color: #0d4c73;
+        color: white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+        .contact-btn:hover {
+            background-color: #136b9e;
+            color: white;
+        }
+
+    .footer-image-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+        .footer-image-grid .img-wrapper {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+    .research-center-placeholder {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-style: italic;
+        color: #adb5bd;
+        font-size: 0.9rem;
+        border: 1px solid #dee2e6;
+    }
+
+    .footer-links-col h5, .footer-contact-col h5 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #0d4c73;
+    }
+
+    .footer-links-col ul, .footer-links-col li {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-links-col a, .footer-contact-col a {
+        color: #6c757d;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.2s;
+    }
+
+        .footer-links-col a:hover, .footer-contact-col a:hover {
+            color: #0d4c73;
+        }
+
+    .social-media a {
+        font-size: 1.5rem;
+        margin-right: 15px;
+        color: #0d4c73;
+        transition: color 0.2s;
+    }
+
+        .social-media a:hover {
+            color: #136b9e;
+        }
+
+    .email-btn {
+        background-color: #0d4c73;
+        color: white;
+        font-weight: 500;
+        padding: 0.5rem 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .email-btn:hover {
+            background-color: #136b9e;
+            color: white;
+        }
+
+    @@media (max-width: 1200px) {
+        .footer-image-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 992px) {
+        .footer-image-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .footer-image-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-logo {
+            margin-bottom: 2rem;
+        }
+
+        .footer-links-col {
+            margin-bottom: 2rem;
+        }
+    }
+
+</style>
+
+
+<!-- Main Content Body: We apply the full-width-content class to all top-level elements that need to break free. -->
+<!-- 1. HERO SECTION -->
+<div class="video-container full-width-content">
+    <video autoplay muted loop id="bg-video">
+        <source src="https://cdn.dorik.com/65b8a0980c950f00116993f2/videos/rain_-_47872-(720p)-6J_cG.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay">
+        <div class="content text-center">
+            <h6 class="fw-bold">IGNITE YOUR ACADEMIC JOURNEY AT AIN SHAMS</h6>
+            <h1 class="display-4 fw-bold">TRANSFORMING DREAMS<br>INTO POWERFUL ACADEMIC<br>REALITIES</h1>
+
+            <div class="mt-4">
+                <a href="#" class="btn btn-lg btn-primary px-4">Register Now</a>
+            </div>
+        </div>
+
+        <!-- REMOVED: Duplicate navbar links, as _Layout provides the main navigation. -->
+    </div>
 </div>
+
+<!-- 2. EDUCATION SECTION -->
+<section class="education-section">
+    <div class="container position-relative">
+        <div class="background-image"></div>
+        <div class="blue-box">
+            <h6>Educational Journey</h6>
+            <h2>Transforming Education through<br>Innovative Learning Strategies</h2>
+            <p>
+                Pioneering academic excellence with cutting-edge research and
+                <strong>global perspectives</strong>.
+            </p>
+            <a href="#" class="btn btn-light btn-lg">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- 3. FOOTER SECTION -->
+<footer class="main-footer">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="footer-logo me-4">
+                        <h2 class="mb-0">Ain Shams</h2>
+                        <h2 class="mb-0">University Portal</h2>
+                    </div>
+                    <a href="#" class="contact-btn ms-auto" aria-label="Contact">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <p class="mb-5">
+                    Your gateway to academic excellence and transformative learning
+                    experiences in Egypt
+                </p>
+                <div class="social-media-section">
+                    <p class="mb-2 text-muted">social media</p>
+                    <p class="mb-3 text-muted">Connect with us across global digital platforms</p>
+                    <div class="social-media">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="footer-image-grid">
+                    <div class="img-wrapper">
+                        <img src="~/OIP.jpg" class="img-fluid" alt="Ain Shams University Logo" />
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="https://cdn.cmsfly.com/68e4b26e9a78480012a0c9b8/images/photo-1533854775446-95c4609da544-vM0er.jpeg" class="img-fluid" alt="Campus View" />
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="https://cdn.cmsfly.com/68e4b26e9a78480012a0c9b8/images/photo-1666243035395-9b7853cecc05-cD5VN.jpeg" class="img-fluid" alt="Main Building" />
+                    </div>
+
+                    <div class="img-wrapper">
+                        <img src="https://cdn.cmsfly.com/68e4b26e9a78480012a0c9b8/images/photo-1543505298-b8be9b52a21a-XRSjC.jpeg" class="img-fluid" alt="City Skyline" />
+                    </div>
+                    <div class="img-wrapper research-center-placeholder">
+                        <p class="text-center">research center</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <img src="https://cdn.cmsfly.com/68e4b26e9a78480012a0c9b8/images/photo-1455734729978-db1ae4f687fc-_yqo8.jpeg" class="img-fluid" alt="Student Crowd" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+        <div class="row">
+            <div class="col-md-4 col-sm-6 footer-links-col">
+                <h5 class="fw-bold">Quick Links</h5>
+                <ul>
+                    <li><a href="#">Admissions</a></li>
+                    <li><a href="#">Academic Programs</a></li>
+                    <li><a href="#">Research</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 col-sm-6 footer-links-col">
+                <h5 class="fw-bold">Legal Information</h5>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Accessibility</a></li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 footer-contact-col mt-4 mt-md-0">
+                <h5 class="fw-bold">Get In Touch</h5>
+                <a href="mailto:info@university.edu" class="email-btn text-center d-inline-block">Email</a>
+            </div>
+        </div>
+    </div>
+</footer>
