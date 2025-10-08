@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\student\\studinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\student\\studinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\student\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\student\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\viewmodel\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\viewmodel\\changepasswordviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\shared\\_mylayout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\shared\\_mylayout1.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\controllers\\instructorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\controllers\\instructorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,14 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\student\\studinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\views\\student\\studinfo.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|solutionrelative:itiproject_ms1\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DAA8453C-8CEC-42D8-8B5C-8ACC4DFDF0E6}|ItiProject_ms1\\ItiProject_ms1.csproj|c:\\users\\yassm\\source\\repos\\itiproject_ms1\\itiproject_ms1\\views\\viewmodel\\studentdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,8 +113,8 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedHeight": 222,
-          "SelectedChildIndex": 26,
+          "DockedHeight": 296,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -142,7 +154,46 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Student\\ChangePassword.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\ChangePassword.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Student\\ChangePassword.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-08T10:55:19.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "ChangePasswordViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\ChangePasswordViewModel.cs",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\ChangePasswordViewModel.cs",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\ChangePasswordViewModel.cs",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\ViewModel\\ChangePasswordViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-08T10:47:11.651Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_MyLayout1.cshtml",
+              "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Shared\\_MyLayout1.cshtml",
+              "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Shared\\_MyLayout1.cshtml",
+              "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Shared\\_MyLayout1.cshtml",
+              "RelativeToolTip": "ItiProject_ms1\\Views\\Shared\\_MyLayout1.cshtml",
+              "ViewState": "AgIAACMAAAAAzszMzMz8vxcAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-08T10:26:21.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "CoursesController.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\CoursesController.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Controllers\\CoursesController.cs",
@@ -150,12 +201,11 @@
               "RelativeToolTip": "ItiProject_ms1\\Controllers\\CoursesController.cs",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAcwKMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T23:03:33.959Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T23:03:33.959Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "InstructorDetailsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\InstructorDetailsViewModel.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\InstructorDetailsViewModel.cs",
@@ -163,12 +213,11 @@
               "RelativeToolTip": "ItiProject_ms1\\Views\\ViewModel\\InstructorDetailsViewModel.cs",
               "ViewState": "AgIAAAQAAAAAMzMzMzMLwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-07T21:43:33.663Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T21:43:33.663Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Instructors\\Details.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Instructors\\Details.cshtml",
@@ -176,12 +225,11 @@
               "RelativeToolTip": "ItiProject_ms1\\Views\\Instructors\\Details.cshtml",
               "ViewState": "AgIAAIMAAAAAAAAAAAAiwI0AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T21:41:44.618Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-07T21:41:44.618Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "StudentDetailsViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\StudentDetailsViewModel.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\StudentDetailsViewModel.cs",
@@ -193,19 +241,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "StudInfo.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\StudInfo.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Student\\StudInfo.cshtml",
               "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\StudInfo.cshtml",
               "RelativeToolTip": "ItiProject_ms1\\Views\\Student\\StudInfo.cshtml",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAAAIAAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAUwGkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-07T21:16:17.79Z"
+              "WhenOpened": "2025-10-07T21:16:17.79Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "StudentDeptViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\StudentDeptViewModel.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\StudentDeptViewModel.cs",
@@ -217,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "EmailSender.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Services\\EmailSender.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Services\\EmailSender.cs",
@@ -229,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
@@ -241,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "InstsDepts.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\InstsDepts.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\InstsDepts.cs",
@@ -253,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "InstDeptUserViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\InstDeptUserViewModel.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\InstDeptUserViewModel.cs",
@@ -265,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Program.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Program.cs",
@@ -277,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "AuthurizeStudentFilter.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Filters\\AuthurizeStudentFilter.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Filters\\AuthurizeStudentFilter.cs",
@@ -289,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "RequestLoggingMiddleware.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\MiddleWare\\RequestLoggingMiddleware.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\MiddleWare\\RequestLoggingMiddleware.cs",
@@ -301,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "Login.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
@@ -313,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Instructors\\Create.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Instructors\\Create.cshtml",
@@ -325,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Courses\\Index.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Courses\\Index.cshtml",
@@ -337,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Instructor.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Instructor.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\Instructor.cs",
@@ -349,20 +398,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "InstructorsController.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\InstructorsController.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Controllers\\InstructorsController.cs",
               "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\InstructorsController.cs",
               "RelativeToolTip": "ItiProject_ms1\\Controllers\\InstructorsController.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAmwEEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-07T19:06:09.49Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "Student.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Models\\Student.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Models\\Student.cs",
@@ -374,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "StudDeptViewModel.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\ViewModel\\StudDeptViewModel.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\ViewModel\\StudDeptViewModel.cs",
@@ -386,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Form.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\Form.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Student\\Form.cshtml",
@@ -398,19 +447,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "StudentController.cs",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\StudentController.cs",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Controllers\\StudentController.cs",
               "ToolTip": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Controllers\\StudentController.cs",
               "RelativeToolTip": "ItiProject_ms1\\Controllers\\StudentController.cs",
-              "ViewState": "AgIAAOAAAADAzMzMzMwQwOQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAcBAAAAAAAAAAAQwA4BAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-05T13:01:37.905Z"
+              "WhenOpened": "2025-10-05T13:01:37.905Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\yassm\\source\\repos\\ItiProject_ms1\\ItiProject_ms1\\Views\\Student\\Index.cshtml",
               "RelativeDocumentMoniker": "ItiProject_ms1\\Views\\Student\\Index.cshtml",
@@ -423,7 +473,7 @@
           ]
         },
         {
-          "DockedHeight": 90,
+          "DockedHeight": 16,
           "SelectedChildIndex": -1,
           "Children": [
             {

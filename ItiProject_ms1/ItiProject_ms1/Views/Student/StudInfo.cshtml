@@ -1,19 +1,32 @@
 ﻿@model ItiProject_ms1.Views.ViewModel.StudentDetailsViewModel
+@using System.Linq
 
 @{
     ViewData["Title"] = "Student Profile";
-    // NOTE: Ensure you have linked the Font Awesome CDN in your _Layout.cshtml file
+    // NOTE: Ensure you have linked the Font Awesome CDN in your _Layout.cshtml file
 }
 
 <div class="container my-5">
+
+    @* Display Status Messages (e.g., from successful password change) *@
+    @if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+
     <div class="row">
         <div class="col-md-5">
             <div class="card shadow">
                 <img src="@Model.Student.ImagePath"
-                                class="card-img-top mx-auto mt-3 rounded-circle"
-                                style="width: 150px; height: 150px; object-fit: cover;"
-                                alt="Student Avatar"
-                                onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';" />
+                     class="card-img-top mx-auto mt-3 rounded-circle"
+                     style="width: 150px; height: 150px; object-fit: cover;"
+                     alt="Student Avatar"
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';" />
 
                 <div class="card-body text-center">
                     <h5 class="card-title text-primary">@Model.Student.Name</h5>
@@ -27,8 +40,13 @@
                 </ul>
 
                 <div class="card-footer">
-                    <a asp-action="ShowStuds" class="btn btn-secondary btn-sm">Back to List</a>
-                    <a asp-action="UpdateStud" asp-route-id="@Model.Student.Id" class="btn btn-warning btn-sm float-end">Edit Profile</a>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Hr"))
+                    {
+                        <a asp-action="ShowStuds" class="btn btn-secondary btn-sm">Back to List</a>
+                        <a asp-action="UpdateStud" asp-route-id="@Model.Student.Id" class="btn btn-warning btn-sm float-end">Edit Profile</a>
+                    }
+                    @* Students typically don't see this footer on their own profile, 
+                       or only see an Edit Profile link if allowed *
                 </div>
             </div>
         </div>
@@ -69,67 +87,33 @@
                         <dt class="col-sm-4">Identity GUID</dt>
                         <dd class="col-sm-8 text-monospace small">@Model.UserId</dd>
                     </dl>
+                    
+                    @* === ADDED: Password Change Link === *@
+                    @if (Model.IsAccountLinked)
+                    {
+                        <div class="mt-4 pt-3 border-top">
+                            <h5>Password Actions</h5>
 
-                
-                        @if (Model.IsAccountLinked)
-                        {
-                            <hr />
-                            <h5 class="text-danger">Admin Password Reset</h5>
-                            <form id="resetPassForm" asp-action="ResetUserPassword" asp-controller="Student" method="post" onsubmit="return validatePasswordReset(event);">
+                            @* Only show 'Change My Password' link to the Student looking at their OWN profile *@
+                            @if (User.IsInRole("Student") && User.Identity.IsAuthenticated)
+                            {
+                                <a asp-action="ChangePassword"
+                                   asp-controller="Student"
+                                   class="btn btn-info">
+                                    <i class="fas fa-lock me-1"></i> Change My Password
+                                </a>
+                            }
 
-                                <input type="hidden" name="userId" value="@Model.UserId" />
-
-                                <div class="mb-2">
-                                    <label for="newPassword" class="form-label visually-hidden">New Password</label>
-                                    <input type="password"
-                                                                 id="newPassword"
-                                                                 name="newPassword"
-                                                                 class="form-control"
-                                                                 placeholder="Enter New Temporary Password"
-                                                                 required
-                                                                 minlength="6" />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <input type="password"
-                                                                 id="confirmPassword"
-                                                                 class="form-control"
-                                                                 placeholder="Confirm New Password"
-                                                                 required />
-
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fas fa-key me-1"></i> Reset Password
-                                    </button>
-                                </div>
-                                <p id="passwordMismatchError" class="text-danger small" style="display:none;">
-                                    New password and confirmation password must match.
+                            @* Admin/HR can see the list of accounts to perform administrative reset *@
+                            @if (User.IsInRole("Admin") || User.IsInRole("Hr"))
+                            {
+                                <p class="text-muted small mt-2">
+                                    Admins can manage passwords from the main student list.
                                 </p>
-                                <small class="text-muted">
-                                    This action immediately sets a new password, bypassing the old one.
-                                </small>
-                            </form>
-
-                            <script>
-                                function validatePasswordReset(event) {
-                                    const newPass = document.getElementById('newPassword').value;
-                                    const confirmPass = document.getElementById('confirmPassword').value;
-                                    const errorElement = document.getElementById('passwordMismatchError');
-
-                                    // Client-side check for password match
-                                    if (newPass !== confirmPass) {
-                                        errorElement.style.display = 'block';
-                                        event.preventDefault(); // Stop form submission
-                                        return false;
-                                    }
-
-                                    errorElement.style.display = 'none';
-
-                                    // Final confirmation dialog before server submission
-                                    return confirm('WARNING: Are you sure you want to reset the password for this user? This cannot be undone.');
-                                }
-                            </script>
-                        }
-                   
+                            }
+                        </div>
+                    }
+                    @* ================================== *@
                 </div>
             </div>
         </div>

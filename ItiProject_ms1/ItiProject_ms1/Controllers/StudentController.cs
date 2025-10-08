@@ -2,6 +2,7 @@
 using ItiProject_ms1.Models;
 using ItiProject_ms1.Repository;
 using ItiProject_ms1.Views.ViewModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,19 +19,23 @@ namespace ItiProject_ms1.Controllers
         private readonly IBaseRepository<Department> _deptRepo;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager; // <-- 1. DECLARE FIELD HERE ⚠️
+        private readonly SignInManager<IdentityUser> _signInManager; // <-- Add this field
 
 
         public StudentController(
-              UserManager<IdentityUser> userManager,
-              IBaseRepository<Student> studentRepo,
-              IBaseRepository<Department> deptRepo,
-              RoleManager<IdentityRole> roleManager) // <-- 2. INJECT HERE 
+           UserManager<IdentityUser> userManager,
+           IBaseRepository<Student> studentRepo,
+           IBaseRepository<Department> deptRepo,
+           RoleManager<IdentityRole> roleManager,
+           SignInManager<IdentityUser> signInManager) // <-- Inject here
         {
             _studentRepo = studentRepo;
             _deptRepo = deptRepo;
             _userManager = userManager;
-            _roleManager = roleManager; // <-- 3. INITIALIZE HERE
+            _roleManager = roleManager;
+            _signInManager = signInManager; // <-- Initialize here
         }
+
 
 
         // GET: List all students
@@ -228,35 +233,55 @@ namespace ItiProject_ms1.Controllers
 
 
         // StudentController.cs
-
-        [Authorize(Roles = "Admin,Hr")]
-        public async Task<IActionResult> ResetPassword(int id, string newPassword)
+        // GET: Display the self-service Change Password form
+        [Authorize] // Any logged-in user can change their password
+        [HttpGet]
+        public IActionResult ChangePassword()
         {
-            // 1. Find the Student/Profile
-            var student = _studentRepo.GetByID(id);
-            if (student?.UserId == null) return NotFound("Student or linked User not found.");
+            // You'll need a ChangePasswordViewModel for the form inputs
+            return View();
+        }
 
-            // 2. Find the Identity User
-            var user = await _userManager.FindByIdAsync(student.UserId);
-            if (user == null) return NotFound("Identity User not found.");
+        // POST: Handle the self-service password change
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            // 3. Generate a token (required for password reset without old password)
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            // 1. Get the currently logged-in user
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                // This means the user is somehow logged in but not found in the Identity database
+                ModelState.AddModelError(string.Empty, "User account not found or session expired.");
+                return View(model);
+            }
 
-            // 4. Reset the password
-            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            // 2. Attempt to change the password, which requires the old password (the temporary one)
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
 
             if (result.Succeeded)
             {
-                // Success message or logging
-                TempData["SuccessMessage"] = $"Password for {user.UserName} reset successfully.";
-                return RedirectToAction("ShowStuds");
+                await _userManager.UpdateSecurityStampAsync(user);
+                await _signInManager.SignOutAsync();
+                await _signInManager.SignInAsync(user, isPersistent: false);
+                TempData["SuccessMessage"] = "Your password has been changed successfully. You can now use your new password.";
+                return RedirectToAction("ShowInfo");
             }
 
-            // Handle errors (e.g., password complexity failed)
-            TempData["ErrorMessage"] = $"Failed to reset password: {string.Join(", ", result.Errors.Select(e => e.Description))}";
-            return RedirectToAction("ShowStuds");
+            // 3. Handle errors (e.g., old password was wrong, or new password failed complexity rules)
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+            return View(model);
         }
+
 
     }
 }
